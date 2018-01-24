@@ -3,6 +3,7 @@ access_website_support_ticket,website support ticket,model_website_support_ticke
 access_website_support_ticket_compose,website support ticket compose,model_website_support_ticket_compose,,1,1,1,0
 access_website_support_ticket_states,website support ticket states,model_website_support_ticket_states,,1,0,0,0
 access_website_support_ticket_message,website support ticket message,model_website_support_ticket_message,,1,0,1,0
+access_website_support_ticket_field,website support ticket field,model_website_support_ticket_field,,1,1,1,0
 access_mail_followers_support,mail followers support,mail.model_mail_followers,,0,0,1,0
 access_website_support_ticket_categories,website support ticket categories,model_website_support_ticket_categories,,1,0,0,0
 access_website_support_ticket_categories_manage,website support ticket categories manage,model_website_support_ticket_categories,sales_team.group_sale_salesman,1,1,1,1

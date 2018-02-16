@@ -38,7 +38,7 @@ class WebsiteSupportTicket(models.Model):
     create_user_id = fields.Many2one('res.users', "Create User", help="New User if not exist yet")
     priority_id = fields.Many2one('website.support.ticket.priority', default=_default_priority_id, string="Priority")
     partner_id = fields.Many2one('res.partner', string="Partner")
-    partner_image = fields.Binary(related='partner_id.image', string="Partner image", readonly='True')  # Todo link di
+    partner_image = fields.Binary(related='partner_id.image_medium', string="Partner image", readonly='True')
     user_id = fields.Many2one('res.users', string="Assigned User", help="To case/ticket assigned user")
     person_name = fields.Char(string='Person Name')
     email = fields.Char(string="Email", help="Email Address if new ticket from website")

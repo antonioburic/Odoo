@@ -175,29 +175,16 @@ class WebsiteSupportTicket(models.Model):
 
     @api.multi
     def toggle_shift_priority(self):
-        # Todo ???  Increases the value of the field 'priority'
-        # ??? 'int' object is not iterable  for record in self: ? str(self.exchange_provider_module)
-        print ("ID for priority : ", self.priority_id.id)
-        recs = self.env['website.support.ticket.priority'].browse()  # search returns a recordset
-        for rec in recs:  # iterate over the records
-            print (rec.name)
-        # sequence = self.env['website.support.ticket.priority'].search([('project_id', '=', project.id)], order='sequence')
-        # sequence = self.env['website.support.ticket.priority'].browse('sequence')
-        # ticket_tuple = tuple(self.env['website.support.ticket.priority'])
-        # ticket_seq = self.env['website.support.ticket.priority']
-        sequence = recs
-        print ("priority sequence: ", sequence)
-        #  print ("Index for priority : ", ticket_tuple, ticket_seq)
-        # max_prio = max(sequence)
-        # print ("Max for priority seq : ", max_prio)
-
-    """
-     if self.priority_id == max(self.priority_id.id):
-         self.priority_id = 1
-     else:
-         self.priority_id += 1
-         record.mapped('partner_id')]
-    """
+        priority_obj = self.env['website.support.ticket.priority']
+        for ticket in self:
+            if ticket.priority_id and ticket.priority_id.sequence:
+                next_priority = priority_obj.search([('sequence', '>', ticket.priority_id.sequence)], order='sequence', limit=1)
+                if next_priority: # if there's next priority, assign it that one
+                    ticket.priority_id = next_priority.id
+                else:
+                    first_priority = priority_obj.search([], order='sequence', limit=1)
+                    if first_priority: # if there isn't, assign the lowest priority (since the button is a toggle)
+                        ticket.priority_id = first_priority.id
 
     @api.model
     def _needaction_domain_get(self):
